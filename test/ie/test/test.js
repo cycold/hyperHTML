@@ -2,8 +2,6 @@
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _templateObject = _taggedTemplateLiteral(['\n    <p data-counter="', '">\n      Time: ', '\n    </p>\n    '], ['\n    <p data-counter="', '">\n      Time: ', '\n    </p>\n    ']),
     _templateObject2 = _taggedTemplateLiteral(['<p>', ' world</p>'], ['<p>', ' world</p>']),
     _templateObject3 = _taggedTemplateLiteral(['<p>', '</p>'], ['<p>', '</p>']),
@@ -20,46 +18,37 @@ var _templateObject = _taggedTemplateLiteral(['\n    <p data-counter="', '">\n  
     _templateObject14 = _taggedTemplateLiteral(['<div>', '</div>'], ['<div>', '</div>']),
     _templateObject15 = _taggedTemplateLiteral(['<a></a>'], ['<a></a>']),
     _templateObject16 = _taggedTemplateLiteral(['<p></p>'], ['<p></p>']),
-    _templateObject17 = _taggedTemplateLiteral(['\n    <style>', '</style>\n    <p onclick="', '"> ', ' </p>\n    <div test="', '">\n      ', '\n      <ul>\n      ', '\n      </ul>\n      ', '\n      <hr>\n    </div>\n    '], ['\n    <style>', '</style>\n    <p onclick="', '"> ', ' </p>\n    <div test="', '">\n      ', '\n      <ul>\n      ', '\n      </ul>\n      ', '\n      <hr>\n    </div>\n    ']),
-    _templateObject18 = _taggedTemplateLiteral(['<div>', ' </div>'], ['<div>', ' </div>']),
+    _templateObject17 = _taggedTemplateLiteral(['<p>', '</p>', '<hr><div>', '</div>', ''], ['<p>', '</p>', '<hr><div>', '</div>', '']),
+    _templateObject18 = _taggedTemplateLiteral(['<!--not hyprHTML-->'], ['<!--not hyprHTML-->']),
     _templateObject19 = _taggedTemplateLiteral(['<br>', ''], ['<br>', '']),
-    _templateObject20 = _taggedTemplateLiteral(['', '<hr>'], ['', '<hr>']),
-    _templateObject21 = _taggedTemplateLiteral(['<br>', '<hr>'], ['<br>', '<hr>']),
-    _templateObject22 = _taggedTemplateLiteral(['<ul>', '</ul>'], ['<ul>', '</ul>']),
-    _templateObject23 = _taggedTemplateLiteral(['\n      <li> ', ' </li>\n    '], ['\n      <li> ', ' </li>\n    ']),
-    _templateObject24 = _taggedTemplateLiteral(['<p></p>', '<hr>'], ['<p></p>', '<hr>']),
-    _templateObject25 = _taggedTemplateLiteral(['<span> ', ' </span>'], ['<span> ', ' </span>']),
-    _templateObject26 = _taggedTemplateLiteral(['<svg>', '</svg>'], ['<svg>', '</svg>']),
-    _templateObject27 = _taggedTemplateLiteral(['\n      <rect x="', '" y="', '" />\n    '], ['\n      <rect x="', '" y="', '" />\n    ']),
-    _templateObject28 = _taggedTemplateLiteral(['<p>', '</p>', '<hr><div>', '</div>', ''], ['<p>', '</p>', '<hr><div>', '</div>', '']),
-    _templateObject29 = _taggedTemplateLiteral(['<!--not hyprHTML-->'], ['<!--not hyprHTML-->']),
-    _templateObject30 = _taggedTemplateLiteral(['', '<br>'], ['', '<br>']),
-    _templateObject31 = _taggedTemplateLiteral(['<style> ', ' </style>'], ['<style> ', ' </style>']),
-    _templateObject32 = _taggedTemplateLiteral(['a=', ''], ['a=', '']),
-    _templateObject33 = _taggedTemplateLiteral(['[', ']'], ['[', ']']),
-    _templateObject34 = _taggedTemplateLiteral(['<p onclick="', '" onmouseover="', '" align="', '"></p>'], ['<p onclick="', '" onmouseover="', '" align="', '"></p>']),
-    _templateObject35 = _taggedTemplateLiteral(['<br>', '<br>'], ['<br>', '<br>']),
-    _templateObject36 = _taggedTemplateLiteral(['<rect x="1" y="2" />'], ['<rect x="1" y="2" />']),
-    _templateObject37 = _taggedTemplateLiteral(['<svg></svg>'], ['<svg></svg>']),
-    _templateObject38 = _taggedTemplateLiteral([''], ['']),
-    _templateObject39 = _taggedTemplateLiteral(['<tr><td>ok</td></tr>'], ['<tr><td>ok</td></tr>']),
-    _templateObject40 = _taggedTemplateLiteral([' <br>', '</br> '], [' <br>', '</br> ']),
-    _templateObject41 = _taggedTemplateLiteral(['\n    <input value="', '" shaka="', '">'], ['\n    <input value="', '" shaka="', '">']),
-    _templateObject42 = _taggedTemplateLiteral(['\n      <div>First name: ', '</div>\n      <p></p>'], ['\n      <div>First name: ', '</div>\n      <p></p>']),
-    _templateObject43 = _taggedTemplateLiteral(['\n    <p></p>', ''], ['\n    <p></p>', '']),
-    _templateObject44 = _taggedTemplateLiteral(['<p test=', '></p>'], ['<p test=', '></p>']),
-    _templateObject45 = _taggedTemplateLiteral(['a ', ''], ['a ', '']),
-    _templateObject46 = _taggedTemplateLiteral(['<p any-attr=', '>any content</p>'], ['<p any-attr=', '>any content</p>']),
-    _templateObject47 = _taggedTemplateLiteral(['<input name=', '>'], ['<input name=', '>']),
-    _templateObject48 = _taggedTemplateLiteral(['abc'], ['abc']),
-    _templateObject49 = _taggedTemplateLiteral(['<p>a', 'c</p>'], ['<p>a', 'c</p>']),
-    _templateObject50 = _taggedTemplateLiteral(['a', 'c'], ['a', 'c']),
-    _templateObject51 = _taggedTemplateLiteral(['<rect />'], ['<rect />']),
-    _templateObject52 = _taggedTemplateLiteral(['<div data=', '>abc</div>'], ['<div data=', '>abc</div>']),
-    _templateObject53 = _taggedTemplateLiteral(['\n      <button>hello</button>'], ['\n      <button>hello</button>']),
-    _templateObject54 = _taggedTemplateLiteral(['\n      <rect x=', ' y=', ' />'], ['\n      <rect x=', ' y=', ' />']),
-    _templateObject55 = _taggedTemplateLiteral(['\n      <p attr=', ' onclick=', '>hello</p>'], ['\n      <p attr=', ' onclick=', '>hello</p>']),
-    _templateObject56 = _taggedTemplateLiteral(['<div>\n    <dumb-element dumb=', '></dumb-element><dumber-element dumb=', '></dumber-element>\n  </div>'], ['<div>\n    <dumb-element dumb=', '></dumb-element><dumber-element dumb=', '></dumber-element>\n  </div>']);
+    _templateObject20 = _taggedTemplateLiteral(['', '<br>'], ['', '<br>']),
+    _templateObject21 = _taggedTemplateLiteral(['<style> ', ' </style>'], ['<style> ', ' </style>']),
+    _templateObject22 = _taggedTemplateLiteral(['a=', ''], ['a=', '']),
+    _templateObject23 = _taggedTemplateLiteral(['[', ']'], ['[', ']']),
+    _templateObject24 = _taggedTemplateLiteral(['<p onclick="', '" onmouseover="', '" align="', '"></p>'], ['<p onclick="', '" onmouseover="', '" align="', '"></p>']),
+    _templateObject25 = _taggedTemplateLiteral(['<br>', '<br>'], ['<br>', '<br>']),
+    _templateObject26 = _taggedTemplateLiteral(['<rect x="1" y="2" />'], ['<rect x="1" y="2" />']),
+    _templateObject27 = _taggedTemplateLiteral(['<svg></svg>'], ['<svg></svg>']),
+    _templateObject28 = _taggedTemplateLiteral([''], ['']),
+    _templateObject29 = _taggedTemplateLiteral(['<tr><td>ok</td></tr>'], ['<tr><td>ok</td></tr>']),
+    _templateObject30 = _taggedTemplateLiteral([' <br>', '</br> '], [' <br>', '</br> ']),
+    _templateObject31 = _taggedTemplateLiteral(['\n    <input value="', '" shaka="', '">'], ['\n    <input value="', '" shaka="', '">']),
+    _templateObject32 = _taggedTemplateLiteral(['\n      <div>First name: ', '</div>\n      <p></p>'], ['\n      <div>First name: ', '</div>\n      <p></p>']),
+    _templateObject33 = _taggedTemplateLiteral(['\n    <p></p>', ''], ['\n    <p></p>', '']),
+    _templateObject34 = _taggedTemplateLiteral(['<p test=', '></p>'], ['<p test=', '></p>']),
+    _templateObject35 = _taggedTemplateLiteral(['<i>', '</i>'], ['<i>', '</i>']),
+    _templateObject36 = _taggedTemplateLiteral(['a ', ''], ['a ', '']),
+    _templateObject37 = _taggedTemplateLiteral(['<p any-attr=', '>any content</p>'], ['<p any-attr=', '>any content</p>']),
+    _templateObject38 = _taggedTemplateLiteral(['<input name=', '>'], ['<input name=', '>']),
+    _templateObject39 = _taggedTemplateLiteral(['abc'], ['abc']),
+    _templateObject40 = _taggedTemplateLiteral(['<p>a', 'c</p>'], ['<p>a', 'c</p>']),
+    _templateObject41 = _taggedTemplateLiteral(['a', 'c'], ['a', 'c']),
+    _templateObject42 = _taggedTemplateLiteral(['<rect />'], ['<rect />']),
+    _templateObject43 = _taggedTemplateLiteral(['<div data=', '>abc</div>'], ['<div data=', '>abc</div>']),
+    _templateObject44 = _taggedTemplateLiteral(['\n      <button>hello</button>'], ['\n      <button>hello</button>']),
+    _templateObject45 = _taggedTemplateLiteral(['\n      <rect x=', ' y=', ' />'], ['\n      <rect x=', ' y=', ' />']),
+    _templateObject46 = _taggedTemplateLiteral(['\n      <p attr=', ' onclick=', '>hello</p>'], ['\n      <p attr=', ' onclick=', '>hello</p>']),
+    _templateObject47 = _taggedTemplateLiteral(['<div>\n    <dumb-element dumb=', '></dumb-element><dumber-element dumb=', '></dumber-element>\n  </div>'], ['<div>\n    <dumb-element dumb=', '></dumb-element><dumber-element dumb=', '></dumber-element>\n  </div>']);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -68,8 +57,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-var SKIP_ADOPT = (typeof location === 'undefined' ? 'undefined' : _typeof(location)) !== (typeof SKIP_ADOPT === 'undefined' ? 'undefined' : _typeof(SKIP_ADOPT)) && -1 < location.search.indexOf('noadopt');
 
 tressa.title('HyperHTML');
 tressa.assert(typeof hyperHTML === 'function', 'hyperHTML is a function');
@@ -353,108 +340,11 @@ tressa.async(function (done) {
   tressa.assert(hyperHTML.wire(ref, ':a')(_templateObject15) === wires.a, 'same wire for <a>');
   tressa.assert(hyperHTML.wire(ref, ':p')(_templateObject16) === wires.p, 'same wire for <p>');
 }).then(function () {
-  if (SKIP_ADOPT) return;
-  tressa.log('## hyperHTML.adopt(node)');
-  var wrap = document.createElement('div');
-  wrap.innerHTML = '<style>*{color:red;}</style><p></p><div test="before"> before <ul><li> lonely </li></ul>NO<hr></div>';
-  var div = wrap.lastElementChild;
-  var text = div.firstChild;
-  var ul = div.firstElementChild;
-  var hr = div.lastElementChild;
-  var model = {
-    click: function click() {},
-    css: '* { color: blue; }',
-    test: 'after',
-    text: 'after',
-    list: [{ name: 'first' }, { name: 'second' }],
-    inBetween: 'OK'
-  };
-
-  var render = hyperHTML.adopt(wrap);
-  update(render, model);
-  tressa.assert(wrap.lastElementChild === div, 'structure has not changed');
-  tressa.assert(div.firstElementChild === ul, 'not even the list');
-  tressa.assert(div.lastElementChild === hr, 'or the hr');
-  model.list.push({ name: 'third' });
-  model.inBetween = document.createElement('br');
-  update(render, model);
-  tressa.assert(wrap.lastElementChild === div, 'not even after model changes');
-  tressa.assert(div.firstElementChild === ul, 'including the list');
-  tressa.assert(div.lastElementChild === hr, 'and the hr');
-
-  function update(render, model) {
-    render(_templateObject17, model.css, model.click, Math.random(), model.test, model.text, model.list.map(function (item) {
-      return '<li> ' + item.name + ' </li>';
-    }), model.inBetween);
-  }
-}).then(function () {
-  tressa.log('## weird .adopt(node) cases');
-  var wrap = document.createElement('div');
-  wrap.innerHTML = '<div>text</div>';
-  hyperHTML.adopt(wrap)(_templateObject14, ' right');
-  tressa.assert(wrap.innerHTML === '<div> right</div>', 'right text OK');
-  hyperHTML.adopt(wrap)(_templateObject18, 'left ');
-  tressa.assert(wrap.innerHTML === '<div>left </div>', 'left text OK');
-  wrap.innerHTML = '';
-  hyperHTML.adopt(wrap)(_templateObject8, 'any');
-  tressa.assert(wrap.innerHTML === 'any', '`${\'virtual\'}` is like `${\'any\'}`');
-  wrap.innerHTML = '<br>';
-  hyperHTML.adopt(wrap)(_templateObject19, 'virtual');
-  if (SKIP_ADOPT) return;
-  tressa.assert(/^<br>virtual<!--.+?-->$/.test(wrap.innerHTML), '`<br>${\'virtual\'}`');
-  wrap.innerHTML = '<hr>';
-  hyperHTML.adopt(wrap)(_templateObject20, 'virtual');
-  tressa.assert(/^virtual<!--.+?--><hr>$/.test(wrap.innerHTML), '${\'virtual\'}<hr>`');
-  wrap.innerHTML = '<br><i>before</i><hr>';
-  hyperHTML.adopt(wrap)(_templateObject21, ['<strong>after</strong>']);
-  tressa.assert(/^<br><strong>after<\/strong><!--.+?--><hr>$/.test(wrap.innerHTML), '<br>${\'<strong>after</strong>\'}<hr>');
-}).then(function () {
-  if (SKIP_ADOPT) return;
-  tressa.log('## hyperHTML.wire(node, "adopt")');
-  var wrap = document.createElement('div');
-  wrap.innerHTML = '<ul><li>before</li></ul>';
-  var items = [{ text: 'first' }];
-  var li = wrap.querySelector('li');
-  var result = hyperHTML.adopt(wrap)(_templateObject22, items.map(function (item) {
-    return hyperHTML.wire(item, 'adopt')(_templateObject23, item.text);
-  }));
-  var list = wrap.querySelectorAll('li');
-  tressa.assert(list.length === 1 && list[0] === li && result.innerHTML === '<ul><li>first</li></ul>', 'one element can be adopted');
-  result = hyperHTML.adopt(wrap)(_templateObject22, items.map(function (item) {
-    return hyperHTML.wire(item, 'adopt')(_templateObject23, item.text);
-  }));
-  list = wrap.querySelectorAll('li');
-  tressa.assert(list.length === 1 && list[0] === li && result.innerHTML === '<ul><li>first</li></ul>', 'even after multiple passes');
-  wrap = document.createElement('div');
-  wrap.innerHTML = '<ul></ul>';
-  result = hyperHTML.adopt(wrap)(_templateObject22, [{ text: 'new' }, { text: 'nodes' }].map(function (item) {
-    return hyperHTML.wire(item, 'adopt')(_templateObject23, item.text);
-  }));
-  list = wrap.querySelectorAll('li');
-  tressa.assert(list.length === 2 && result.innerHTML === '<ul><li>new</li><li>nodes</li></ul>', 'if not there, elements get created');
-
-  wrap = document.createElement('div');
-  wrap.innerHTML = '<p></p><hr>';
-  result = hyperHTML.adopt(wrap)(_templateObject24, hyperHTML.wire(items[0], 'adopt')(_templateObject25, items[0].text));
-  var lastResult = result.innerHTML;
-  result = hyperHTML.adopt(wrap)(_templateObject24, items.map(function (item) {
-    return hyperHTML.wire(item, 'adopt')(_templateObject25, item.text);
-  }));
-  tressa.assert(lastResult === result.innerHTML, 'virtual content can be adopted too');
-
-  wrap = document.createElement('div');
-  wrap.innerHTML = '<svg></svg>';
-  if (!('ownerSVGElement' in wrap.firstChild)) wrap.firstChild.ownerSVGElement = null;
-  result = hyperHTML.adopt(wrap)(_templateObject26, [{ x: 1, y: 2 }].map(function (item) {
-    return hyperHTML.wire(item, 'adopt')(_templateObject27, item.x, item.y);
-  }));
-  tressa.assert(/<svg(?: xmlns=[^>]+?)?>\s*<rect [xy]="[12]" [xy]="[12]">\s*<\/rect>\s*<\/svg>/.test(result.innerHTML) && result.querySelector('rect').getAttribute('x') == 1 && result.querySelector('rect').getAttribute('y') == 2, 'svg content can be adopted too');
-}).then(function () {
   return tressa.async(function (done) {
     tressa.log('## Promises instead of nodes');
     var wrap = document.createElement('div');
     var render = hyperHTML.bind(wrap);
-    render(_templateObject28, new Promise(function (r) {
+    render(_templateObject17, new Promise(function (r) {
       setTimeout(r, 50, 'any');
     }), new Promise(function (r) {
       setTimeout(r, 10, 'virtual');
@@ -477,14 +367,14 @@ tressa.async(function (done) {
 }).then(function () {
   tressa.log('## for code coverage sake');
   var wrap = document.createElement('div');
-  var result = hyperHTML.wire()(_templateObject29);
+  var result = hyperHTML.wire()(_templateObject18);
   tressa.assert(result.nodeType === 8, 'it is a comment');
   tressa.assert(result.textContent === 'not hyprHTML', 'correct content');
   hyperHTML.bind(wrap)(_templateObject19, 'node before');
   tressa.assert(/^<br>node before<!--.+?-->$/i.test(wrap.innerHTML), 'node before');
-  hyperHTML.bind(wrap)(_templateObject30, 'node after');
+  hyperHTML.bind(wrap)(_templateObject20, 'node after');
   tressa.assert(/^node after<!--.+?--><br>$/i.test(wrap.innerHTML), 'node after');
-  hyperHTML.bind(wrap)(_templateObject31, 'hyper-html{}');
+  hyperHTML.bind(wrap)(_templateObject21, 'hyper-html{}');
   tressa.assert('<style>hyper-html{}</style>' === wrap.innerHTML.toLowerCase(), 'node style');
   hyperHTML.bind(wrap)(_templateObject8, document.createTextNode('a'));
   hyperHTML.bind(wrap)(_templateObject8, document.createDocumentFragment());
@@ -507,43 +397,43 @@ tressa.async(function (done) {
   tressa.assert(wrap.textContent === 'ab', 'same array of nodes');
   hyperHTML.bind(wrap)(_templateObject8, wrap.childNodes);
   tressa.assert(wrap.textContent === 'ab', 'childNodes as list');
-  hyperHTML.bind(wrap)(_templateObject32, { length: 1, '0': 'b' });
+  hyperHTML.bind(wrap)(_templateObject22, { length: 1, '0': 'b' });
   tressa.assert(wrap.textContent === 'a=b', 'childNodes as virtual list');
-  hyperHTML.bind(wrap)(_templateObject33, 'text');
-  hyperHTML.bind(wrap)(_templateObject33, 'text');
+  hyperHTML.bind(wrap)(_templateObject23, 'text');
+  hyperHTML.bind(wrap)(_templateObject23, 'text');
   var onclick = function onclick(e) {};
   var handler = { handleEvent: onclick };
-  hyperHTML.bind(wrap)(_templateObject34, onclick, handler, 'left');
+  hyperHTML.bind(wrap)(_templateObject24, onclick, handler, 'left');
   handler = { handleEvent: onclick };
-  hyperHTML.bind(wrap)(_templateObject34, onclick, handler, 'left');
-  hyperHTML.bind(wrap)(_templateObject34, onclick, handler, 'left');
-  hyperHTML.bind(wrap)(_templateObject35, arr[0]);
-  hyperHTML.bind(wrap)(_templateObject35, arr);
-  hyperHTML.bind(wrap)(_templateObject35, arr);
-  hyperHTML.bind(wrap)(_templateObject35, []);
-  hyperHTML.bind(wrap)(_templateObject35, ['1', '2']);
-  hyperHTML.bind(wrap)(_templateObject35, document.createDocumentFragment());
+  hyperHTML.bind(wrap)(_templateObject24, onclick, handler, 'left');
+  hyperHTML.bind(wrap)(_templateObject24, onclick, handler, 'left');
+  hyperHTML.bind(wrap)(_templateObject25, arr[0]);
+  hyperHTML.bind(wrap)(_templateObject25, arr);
+  hyperHTML.bind(wrap)(_templateObject25, arr);
+  hyperHTML.bind(wrap)(_templateObject25, []);
+  hyperHTML.bind(wrap)(_templateObject25, ['1', '2']);
+  hyperHTML.bind(wrap)(_templateObject25, document.createDocumentFragment());
   tressa.assert(true, 'passed various virtual content scenarios');
   var svgContainer = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   if (!('ownerSVGElement' in svgContainer)) svgContainer.ownerSVGElement = null;
-  hyperHTML.bind(svgContainer)(_templateObject36);
-  result = hyperHTML.wire(null, 'svg')(_templateObject37);
+  hyperHTML.bind(svgContainer)(_templateObject26);
+  result = hyperHTML.wire(null, 'svg')(_templateObject27);
   tressa.assert(result.nodeName.toLowerCase() === 'svg', 'svg content is allowed too');
-  result = hyperHTML.wire()(_templateObject38);
+  result = hyperHTML.wire()(_templateObject28);
   tressa.assert(!result.innerHTML, 'empty content');
-  var tr = hyperHTML.wire()(_templateObject39);
+  var tr = hyperHTML.wire()(_templateObject29);
   tressa.assert(true, 'even TR as template');
 
   hyperHTML.bind(wrap)(_templateObject8, ' 1 ');
   tressa.assert(wrap.textContent === ' 1 ', 'text in between');
 
-  hyperHTML.bind(wrap)(_templateObject40, 1);
+  hyperHTML.bind(wrap)(_templateObject30, 1);
   tressa.assert(/ <br>1<!--.+?--><br> /.test(wrap.innerHTML), 'virtual content in between');
 }).then(function () {
   tressa.log('## no WebKit backfire');
   var div = document.createElement('div');
   function update(value, attr) {
-    return hyperHTML.bind(div)(_templateObject41, value, attr);
+    return hyperHTML.bind(div)(_templateObject31, value, attr);
   }
   var input = update('', '').firstElementChild;
   input.value = '456';
@@ -556,17 +446,17 @@ tressa.async(function (done) {
   var div = document.createElement('div');
   var employees = [{ first: 'Bob', last: 'Li' }, { first: 'Ayesha', last: 'Johnson' }];
   hyperHTML.bind(div)(_templateObject8, employees.map(function (employee) {
-    return hyperHTML.wire(employee)(_templateObject42, employee.first);
+    return hyperHTML.wire(employee)(_templateObject32, employee.first);
   }));
   tressa.assert(div.childElementCount === 4, 'correct elements as setAny');
-  hyperHTML.bind(div)(_templateObject43, employees.map(function (employee) {
-    return hyperHTML.wire(employee)(_templateObject42, employee.first);
+  hyperHTML.bind(div)(_templateObject33, employees.map(function (employee) {
+    return hyperHTML.wire(employee)(_templateObject32, employee.first);
   }));
   tressa.assert(div.childElementCount === 5, 'correct elements as setVirtual');
 }).then(function () {
   tressa.log('## attributes without quotes');
   var div = document.createElement('div');
-  hyperHTML.bind(div)(_templateObject44, 'a"b');
+  hyperHTML.bind(div)(_templateObject34, 'a"b');
   tressa.assert(div.firstChild.getAttribute('test') === 'a"b', 'OK');
 }).then(function () {
   tressa.log('## any content extras');
@@ -575,49 +465,48 @@ tressa.async(function (done) {
   tressa.assert(div.innerHTML === '<p></p>', 'expected layout');
   hyperHTML.bind(div)(_templateObject3, { text: '<img>' });
   tressa.assert(div.innerHTML === '<p>&lt;img&gt;</p>', 'expected text');
-  hyperHTML.bind(div)(_templateObject3, function () {
-    return '<b>';
-  });
-  tressa.assert(div.innerHTML === '<p>&lt;b&gt;</p>', 'expected callback');
+  hyperHTML.bind(div)(_templateObject35, 'same');
+  hyperHTML.bind(div)(_templateObject35, 'same');
+  tressa.assert(div.innerHTML === '<i>same</i>', 'expected same text');
 }).then(function () {
   tressa.log('## virtual content extras');
   var div = document.createElement('div');
-  hyperHTML.bind(div)(_templateObject45, null);
+  hyperHTML.bind(div)(_templateObject36, null);
   tressa.assert(/a <[^>]+?>/.test(div.innerHTML), 'expected layout');
-  hyperHTML.bind(div)(_templateObject45, { text: '<img>' });
+  hyperHTML.bind(div)(_templateObject36, { text: '<img>' });
   tressa.assert(/a &lt;img&gt;<[^>]+?>/.test(div.innerHTML), 'expected text');
-  hyperHTML.bind(div)(_templateObject45, { any: 123 });
+  hyperHTML.bind(div)(_templateObject36, { any: 123 });
   tressa.assert(/a 123<[^>]+?>/.test(div.innerHTML), 'expected any');
-  hyperHTML.bind(div)(_templateObject45, { html: '<b>ok</b>' });
+  hyperHTML.bind(div)(_templateObject36, { html: '<b>ok</b>' });
   tressa.assert(/a <b>ok<\/b><[^>]+?>/.test(div.innerHTML), 'expected html');
-  hyperHTML.bind(div)(_templateObject45, {});
+  hyperHTML.bind(div)(_templateObject36, {});
   tressa.assert(/a <[^>]+?>/.test(div.innerHTML), 'expected nothing');
 }).then(function () {
   tressa.log('## defined transformer');
   hyperHTML.define('eUC', encodeURIComponent);
   var div = document.createElement('div');
-  hyperHTML.bind(div)(_templateObject32, { eUC: 'b c' });
+  hyperHTML.bind(div)(_templateObject22, { eUC: 'b c' });
   tressa.assert(/a=b%20c<[^>]+?>/.test(div.innerHTML), 'expected virtual layout');
   hyperHTML.bind(div)(_templateObject3, { eUC: 'b c' });
   tressa.assert(/<p>b%20c<\/p>/.test(div.innerHTML), 'expected layout');
 }).then(function () {
   tressa.log('## attributes with null values');
   var div = document.createElement('div');
-  hyperHTML.bind(div)(_templateObject46, '1');
+  hyperHTML.bind(div)(_templateObject37, '1');
   tressa.assert(div.firstChild.hasAttribute('any-attr') && div.firstChild.getAttribute('any-attr') === '1', 'regular attribute');
-  hyperHTML.bind(div)(_templateObject46, null);
+  hyperHTML.bind(div)(_templateObject37, null);
   tressa.assert(!div.firstChild.hasAttribute('any-attr') && div.firstChild.getAttribute('any-attr') == null, 'can be removed');
-  hyperHTML.bind(div)(_templateObject46, undefined);
+  hyperHTML.bind(div)(_templateObject37, undefined);
   tressa.assert(!div.firstChild.hasAttribute('any-attr') && div.firstChild.getAttribute('any-attr') == null, 'multiple times');
-  hyperHTML.bind(div)(_templateObject46, '2');
+  hyperHTML.bind(div)(_templateObject37, '2');
   tressa.assert(div.firstChild.hasAttribute('any-attr') && div.firstChild.getAttribute('any-attr') === '2', 'but can be also reassigned');
-  hyperHTML.bind(div)(_templateObject46, '3');
+  hyperHTML.bind(div)(_templateObject37, '3');
   tressa.assert(div.firstChild.hasAttribute('any-attr') && div.firstChild.getAttribute('any-attr') === '3', 'many other times');
-  hyperHTML.bind(div)(_templateObject47, 'test');
+  hyperHTML.bind(div)(_templateObject38, 'test');
   tressa.assert(div.firstChild.hasAttribute('name') && div.firstChild.name === 'test', 'special attributes are set too');
-  hyperHTML.bind(div)(_templateObject47, null);
+  hyperHTML.bind(div)(_templateObject38, null);
   tressa.assert(!div.firstChild.hasAttribute('name') && !div.firstChild.name, 'but can also be removed');
-  hyperHTML.bind(div)(_templateObject47, undefined);
+  hyperHTML.bind(div)(_templateObject38, undefined);
   tressa.assert(!div.firstChild.hasAttribute('name') && !div.firstChild.name, 'with either null or undefined');
 }).then(function () {
   return tressa.async(function (done) {
@@ -625,7 +514,7 @@ tressa.async(function (done) {
     var div = document.createElement('div');
     var vdiv = document.createElement('div');
     hyperHTML.bind(div)(_templateObject3, { eUC: 'b c', placeholder: 'z' });
-    hyperHTML.bind(vdiv)(_templateObject32, { eUC: 'b c', placeholder: 'z' });
+    hyperHTML.bind(vdiv)(_templateObject22, { eUC: 'b c', placeholder: 'z' });
     tressa.assert(/<p>z<\/p>/.test(div.innerHTML), 'expected inner placeholder layout');
     tressa.assert(/a=z<[^>]+?>/.test(vdiv.innerHTML), 'expected virtual placeholder layout');
     setTimeout(function () {
@@ -650,21 +539,21 @@ tressa.async(function (done) {
   tressa.log('## hyper(...)');
   var hyper = hyperHTML.hyper;
   tressa.assert(typeof hyper() === 'function', 'empty hyper() is a wire tag');
-  tressa.assert(hyper(_templateObject48).textContent === 'abc', 'hyper`abc`');
-  tressa.assert(hyper(_templateObject49, 2).textContent === 'a2c', 'hyper`<p>a${2}c</p>`');
-  tressa.assert(hyper(document.createElement('div'))(_templateObject48).textContent === 'abc', 'hyper(div)`abc`');
-  tressa.assert(hyper(document.createElement('div'))(_templateObject50, 'b').textContent === 'abc', 'hyper(div)`a${"b"}c`');
+  tressa.assert(hyper(_templateObject39).textContent === 'abc', 'hyper`abc`');
+  tressa.assert(hyper(_templateObject40, 2).textContent === 'a2c', 'hyper`<p>a${2}c</p>`');
+  tressa.assert(hyper(document.createElement('div'))(_templateObject39).textContent === 'abc', 'hyper(div)`abc`');
+  tressa.assert(hyper(document.createElement('div'))(_templateObject41, 'b').textContent === 'abc', 'hyper(div)`a${"b"}c`');
   // WFT jsdom ?!
   delete Object.prototype.nodeType;
-  tressa.assert(hyper({})(_templateObject48).textContent === 'abc', 'hyper({})`abc`');
-  tressa.assert(hyper({})(_templateObject49, 'b').textContent === 'abc', 'hyper({})`<p>a${\'b\'}c</p>`');
-  tressa.assert(hyper({}, ':id')(_templateObject48).textContent === 'abc', 'hyper({}, \':id\')`abc`');
-  tressa.assert(hyper({}, ':id')(_templateObject49, 'b').textContent === 'abc', 'hyper({}, \':id\')`<p>a${\'b\'}c</p>`');
-  tressa.assert(hyper('svg')(_templateObject51), 'hyper("svg")`<rect />`');
+  tressa.assert(hyper({})(_templateObject39).textContent === 'abc', 'hyper({})`abc`');
+  tressa.assert(hyper({})(_templateObject40, 'b').textContent === 'abc', 'hyper({})`<p>a${\'b\'}c</p>`');
+  tressa.assert(hyper({}, ':id')(_templateObject39).textContent === 'abc', 'hyper({}, \':id\')`abc`');
+  tressa.assert(hyper({}, ':id')(_templateObject40, 'b').textContent === 'abc', 'hyper({}, \':id\')`<p>a${\'b\'}c</p>`');
+  tressa.assert(hyper('svg')(_templateObject42), 'hyper("svg")`<rect />`');
 }).then(function () {
   tressa.log('## data=${anyContent}');
   var obj = { rand: Math.random() };
-  var div = hyperHTML.wire()(_templateObject52, obj);
+  var div = hyperHTML.wire()(_templateObject43, obj);
   tressa.assert(div.data === obj, 'data available without serialization');
   tressa.assert(div.outerHTML === '<div>abc</div>', 'attribute not there');
 }).then(function () {
@@ -682,7 +571,7 @@ tressa.async(function (done) {
     _createClass(Button, [{
       key: 'render',
       value: function render() {
-        return this.html(_templateObject53);
+        return this.html(_templateObject44);
       }
     }]);
 
@@ -704,7 +593,7 @@ tressa.async(function (done) {
     _createClass(Rect, [{
       key: 'render',
       value: function render() {
-        return this.svg(_templateObject54, this.state.x, this.state.y);
+        return this.svg(_templateObject45, this.state.x, this.state.y);
       }
     }]);
 
@@ -731,7 +620,7 @@ tressa.async(function (done) {
     }, {
       key: 'render',
       value: function render() {
-        return this.html(_templateObject55, this.state.attr, this);
+        return this.html(_templateObject46, this.state.attr, this);
       }
     }]);
 
@@ -770,7 +659,7 @@ tressa.async(function (done) {
   function DumbElement() {}
   DumbElement.prototype.dumb = null;
   customElements.define('dumb-element', DumbElement);
-  var div = hyperHTML.wire()(_templateObject56, true, true);
+  var div = hyperHTML.wire()(_templateObject47, true, true);
   Object.defineProperty(global, 'customElements', {
     configurable: true,
     value: registry

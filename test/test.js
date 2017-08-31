@@ -1,5 +1,3 @@
-var SKIP_ADOPT = typeof location !== typeof SKIP_ADOPT && -1 < location.search.indexOf('noadopt');
-
 tressa.title('HyperHTML');
 tressa.assert(typeof hyperHTML === 'function', 'hyperHTML is a function');
 
@@ -331,152 +329,6 @@ tressa.async(function (done) {
   tressa.assert(hyperHTML.wire(ref, ':p')`<p></p>` === wires.p, 'same wire for <p>');
 })
 .then(function () {
-  if (SKIP_ADOPT) return;
-  tressa.log('## hyperHTML.adopt(node)');
-  let wrap = document.createElement('div');
-  wrap.innerHTML = '<style>*{color:red;}</style><p></p><div test="before"> before <ul><li> lonely </li></ul>NO<hr></div>';
-  let div = wrap.lastElementChild;
-  let text = div.firstChild;
-  let ul = div.firstElementChild;
-  let hr = div.lastElementChild;
-  let model = {
-    click: function () {},
-    css: '* { color: blue; }',
-    test: 'after',
-    text: 'after',
-    list: [
-      {name: 'first'},
-      {name: 'second'}
-    ],
-    inBetween: 'OK'
-  };
-
-  let render = hyperHTML.adopt(wrap);
-  update(render, model);
-  tressa.assert(wrap.lastElementChild === div, 'structure has not changed');
-  tressa.assert(div.firstElementChild === ul, 'not even the list');
-  tressa.assert(div.lastElementChild === hr, 'or the hr');
-  model.list.push({name: 'third'});
-  model.inBetween = document.createElement('br');
-  update(render, model);
-  tressa.assert(wrap.lastElementChild === div, 'not even after model changes');
-  tressa.assert(div.firstElementChild === ul, 'including the list');
-  tressa.assert(div.lastElementChild === hr, 'and the hr');
-
-  function update(render, model) {
-    render`
-    <style>${model.css}</style>
-    <p onclick="${model.click}"> ${Math.random()} </p>
-    <div test="${model.test}">
-      ${model.text}
-      <ul>
-      ${model.list.map(item => `<li> ${item.name} </li>`)}
-      </ul>
-      ${model.inBetween}
-      <hr>
-    </div>
-    `;
-  }
-})
-.then(function () {
-  tressa.log('## weird .adopt(node) cases');
-  let wrap = document.createElement('div');
-  wrap.innerHTML = '<div>text</div>';
-  hyperHTML.adopt(wrap)`<div>${' right'}</div>`;
-  tressa.assert(wrap.innerHTML === '<div> right</div>', 'right text OK');
-  hyperHTML.adopt(wrap)`<div>${'left '} </div>`;
-  tressa.assert(wrap.innerHTML === '<div>left </div>', 'left text OK');
-  wrap.innerHTML = '';
-  hyperHTML.adopt(wrap)`${'any'}`;
-  tressa.assert(wrap.innerHTML === 'any', '`${\'virtual\'}` is like `${\'any\'}`');
-  wrap.innerHTML = '<br>';
-  hyperHTML.adopt(wrap)`<br>${'virtual'}`;
-  if (SKIP_ADOPT) return;
-  tressa.assert(/^<br>virtual<!--.+?-->$/.test(wrap.innerHTML), '`<br>${\'virtual\'}`');
-  wrap.innerHTML = '<hr>';
-  hyperHTML.adopt(wrap)`${'virtual'}<hr>`;
-  tressa.assert(/^virtual<!--.+?--><hr>$/.test(wrap.innerHTML), '${\'virtual\'}<hr>`');
-  wrap.innerHTML = '<br><i>before</i><hr>';
-  hyperHTML.adopt(wrap)`<br>${['<strong>after</strong>']}<hr>`;
-  tressa.assert(/^<br><strong>after<\/strong><!--.+?--><hr>$/.test(wrap.innerHTML), '<br>${\'<strong>after</strong>\'}<hr>');
-})
-.then(function () {
-  if (SKIP_ADOPT) return;
-  tressa.log('## hyperHTML.wire(node, "adopt")');
-  let wrap = document.createElement('div');
-  wrap.innerHTML = '<ul><li>before</li></ul>';
-  let items = [{text: 'first'}];
-  let li = wrap.querySelector('li');
-  let result = hyperHTML.adopt(wrap)`<ul>${
-    items.map(item => hyperHTML.wire(item, 'adopt')`
-      <li> ${item.text} </li>
-    `)
-  }</ul>`;
-  let list = wrap.querySelectorAll('li');
-  tressa.assert(
-    list.length === 1 &&
-    list[0] === li &&
-    result.innerHTML === '<ul><li>first</li></ul>',
-    'one element can be adopted'
-  );
-  result = hyperHTML.adopt(wrap)`<ul>${
-    items.map(item => hyperHTML.wire(item, 'adopt')`
-      <li> ${item.text} </li>
-    `)
-  }</ul>`;
-  list = wrap.querySelectorAll('li');
-  tressa.assert(
-    list.length === 1 &&
-    list[0] === li &&
-    result.innerHTML === '<ul><li>first</li></ul>',
-    'even after multiple passes'
-  );
-  wrap = document.createElement('div');
-  wrap.innerHTML = '<ul></ul>';
-  result = hyperHTML.adopt(wrap)`<ul>${
-    [{text: 'new'}, {text: 'nodes'}].map(item => hyperHTML.wire(item, 'adopt')`
-      <li> ${item.text} </li>
-    `)
-  }</ul>`;
-  list = wrap.querySelectorAll('li');
-  tressa.assert(
-    list.length === 2 &&
-    result.innerHTML === '<ul><li>new</li><li>nodes</li></ul>',
-    'if not there, elements get created'
-  );
-
-  wrap = document.createElement('div');
-  wrap.innerHTML = '<p></p><hr>';
-  result = hyperHTML.adopt(wrap)`<p></p>${
-    hyperHTML.wire(items[0], 'adopt')`<span> ${items[0].text} </span>`
-  }<hr>`;
-  let lastResult = result.innerHTML;
-  result = hyperHTML.adopt(wrap)`<p></p>${
-    items.map(item => hyperHTML.wire(item, 'adopt')`<span> ${item.text} </span>`)
-  }<hr>`;
-  tressa.assert(
-    lastResult === result.innerHTML,
-    'virtual content can be adopted too'
-  );
-
-
-  wrap = document.createElement('div');
-  wrap.innerHTML = '<svg></svg>';
-  if (!('ownerSVGElement' in wrap.firstChild)) wrap.firstChild.ownerSVGElement = null;
-  result = hyperHTML.adopt(wrap)`<svg>${
-    [{x: 1, y: 2}].map(item => hyperHTML.wire(item, 'adopt')`
-      <rect x="${item.x}" y="${item.y}" />
-    `)
-  }</svg>`;
-  tressa.assert(
-    /<svg(?: xmlns=[^>]+?)?>\s*<rect [xy]="[12]" [xy]="[12]">\s*<\/rect>\s*<\/svg>/.test(result.innerHTML) &&
-    result.querySelector('rect').getAttribute('x') == 1 &&
-    result.querySelector('rect').getAttribute('y') == 2,
-    'svg content can be adopted too'
-  );
-
-})
-.then(function () {
   return tressa.async(function (done) {
     tressa.log('## Promises instead of nodes');
     let wrap = document.createElement('div');
@@ -622,8 +474,9 @@ tressa.async(function (done) {
   tressa.assert(div.innerHTML === '<p></p>', 'expected layout');
   hyperHTML.bind(div)`<p>${{text: '<img>'}}</p>`;
   tressa.assert(div.innerHTML === '<p>&lt;img&gt;</p>', 'expected text');
-  hyperHTML.bind(div)`<p>${function () { return '<b>'; }}</p>`;
-  tressa.assert(div.innerHTML === '<p>&lt;b&gt;</p>', 'expected callback');
+  hyperHTML.bind(div)`<i>${'same'}</i>`;
+  hyperHTML.bind(div)`<i>${'same'}</i>`;
+  tressa.assert(div.innerHTML === '<i>same</i>', 'expected same text');
 })
 .then(function () {
   tressa.log('## virtual content extras');

@@ -32,18 +32,6 @@ var hyperHTML = (function (globalDocument) {'use strict';
       ).apply(null, arguments);
   }
 
-  // hyper.adopt(el) 🐣
-  // import an already live DOM structure
-  // described as TL
-  hyper.adopt = function adopt(node) {
-    return function () {
-      notAdopting = false;
-      render.apply(node, arguments);
-      notAdopting = true;
-      return node;
-    };
-  };
-
   // hyper.bind(el) ⚡️
   // render TL inside a DOM node used as context
   hyper.bind = bind;
@@ -325,13 +313,6 @@ var hyperHTML = (function (globalDocument) {'use strict';
             node.parentNode.insertBefore(childNodes[0], node);
           }
           break;
-        case 'function':
-          if (justContent) {
-            anyVirtual(value(node, getChildren(node), 0));
-          } else {
-            anyVirtual(value(node.parentNode, childNodes, 0));
-          }
-          break;
         case 'object':
         case 'undefined':
           if (value == null) {
@@ -354,16 +335,6 @@ var hyperHTML = (function (globalDocument) {'use strict';
                 case 'number':
                 case 'boolean':
                   anyVirtual({html: value});
-                  break;
-                case 'function':
-                  var parentNode = justContent ? node : node.parentNode;
-                  var children = justContent ?
-                      slice.call(getChildren(node)) : childNodes;
-                  for (var i = 0; i < length; i++) {
-                    value[i] = value[i](parentNode, children, i);
-                  }
-                  if (justContent) removeNodeList(children, i);
-                  anyVirtual(value.concat.apply([], value));
                   break;
                 case 'object':
                   if (isArray(value[0])) {
@@ -639,85 +610,6 @@ var hyperHTML = (function (globalDocument) {'use strict';
     return node.ownerDocument.createTextNode(text);
   }
 
-  // given an info, tries to find out the best option
-  // to replace or update the content
-  function discoverNode(parentNode, virtual, info, childNodes) {
-    for (var
-      target = parentNode,
-      document = parentNode.ownerDocument,
-      path = info.path,
-      virtualNode = getNode(virtual, path),
-      i = 0,
-      length = path.length;
-      i < length; i++
-    ) {
-      switch (path[i++]) {
-        case 'attributes':
-          var name = virtualNode.name;
-          if (!parentNode.hasAttribute(name)) {
-            parentNode.setAttribute(name, '');
-          }
-          target = parentNode.attributes[name];
-          break;
-        case 'childNodes':
-          var children = getChildren(parentNode);
-          var virtualChildren = getChildren(virtualNode.parentNode);
-          target = previousElementSibling(virtualNode);
-          var before = target ? (path.indexOf.call(virtualChildren, target) + 1) : -1;
-          target = nextElementSibling(virtualNode);
-          var after = target ? path.indexOf.call(virtualChildren, target) : -1;
-          target = document.createComment(UID);
-          switch (true) {
-            // `${'virtual'}` is actually resolved as `${'any'}`
-            // case before < 0 && after < 0: before = 0;
-
-            // `</a>${'virtual'}`
-            case after < 0:
-              after = children.length;
-              break;
-            // `${'virtual'}<b>`
-            case before < 0:
-              before = 0;
-            // `</a>${'virtual'}<b>`
-            default:
-              after = -(virtualChildren.length - after);
-              break;
-          }
-          childNodes.push.apply(
-            childNodes,
-            slice.call(children, before, after)
-          );
-          if (childNodes.length) {
-            insertBefore(
-              parentNode,
-              target,
-              nextElementSibling(childNodes[childNodes.length - 1])
-            );
-          } else {
-            insertBefore(
-              parentNode,
-              target,
-              slice.call(children, after)[0]
-            );
-          }
-          if (childNodes.length === 0) {
-            removePreviousText(parentNode, target);
-          }
-          break;
-        default:
-          // if the node is not there, create it
-          target = getChildren(parentNode)[path[i]] ||
-                    parentNode.appendChild(
-                      parentNode.ownerDocument.createElement(
-                        getNode(virtual, path.slice(0, i + 1)).nodeName
-                      )
-                    );
-          parentNode = target;
-          break;
-      }
-    }
-    return target;
-  }
 
   // returns current customElements reference
   // compatible with basicHTML too
@@ -725,15 +617,6 @@ var hyperHTML = (function (globalDocument) {'use strict';
     var doc = hyper.document;
     var ce = doc.customElements || doc.defaultView.customElements;
     return ce && ce.get(node.nodeName.toLowerCase());
-  }
-
-  // avoid errors on obsolete platforms
-  function insertBefore(parentNode, target, after) {
-    if (after) {
-      parentNode.insertBefore(target, after);
-    } else {
-      parentNode.appendChild(target);
-    }
   }
 
   // verify that an attribute has
@@ -800,15 +683,6 @@ var hyperHTML = (function (globalDocument) {'use strict';
   function removeAttributeList(list) {
     for (var i = 0, length = list.length; i < length; i++) {
       list[i++].removeAttribute(list[i]);
-    }
-  }
-
-  // remove all text nodes from a virtual space
-  function removePreviousText(parentNode, node) {
-    var previousSibling = node.previousSibling;
-    if (previousSibling && previousSibling.nodeType === TEXT_NODE) {
-      parentNode.removeChild(previousSibling);
-      removePreviousText(parentNode, node);
     }
   }
 
@@ -993,25 +867,6 @@ var hyperHTML = (function (globalDocument) {'use strict';
     return $1 + ($2 || '"') + UID + ($2 || '"');
   };
 
-  // IE/Edge gotcha with comment nodes
-  var nextElementSibling = IE ?
-    function (node) {
-      while (node = node.nextSibling) {
-        if (node.nodeType === ELEMENT_NODE) return node;
-      }
-      return undefined;
-    } :
-    function (node) { return node.nextElementSibling; };
-
-  var previousElementSibling = IE ?
-    function (node) {
-      while (node = node.previousSibling) {
-        if (node.nodeType === ELEMENT_NODE) return node;
-      }
-      return undefined;
-    } :
-    function (node) { return node.previousElementSibling; };
-
   // [element] = {template, updates};
   var hypers = new $WeakMap;
 
@@ -1020,9 +875,6 @@ var hyperHTML = (function (globalDocument) {'use strict';
 
   // [template] = {fragment, paths};
   var templates = new $Map;
-
-  // internal signal to switch adoption
-  var notAdopting = true;
 
   // IE 11 has problems with cloning templates too
   // it "forgets" empty childNodes
@@ -1118,28 +970,6 @@ var hyperHTML = (function (globalDocument) {'use strict';
     return updates;
   }
 
-  // like createUpdates but for nodes with already a content
-  function discoverUpdates(fragment, paths) {
-    for (var
-      info, childNodes,
-      updates = [],
-      removeAttributes = [],
-      i = 0, length = paths.length;
-      i < length; i++
-    ) {
-      childNodes = [];
-      info = paths[i];
-      updates[i] = setContent(
-        info,
-        discoverNode(this, fragment, info, childNodes),
-        removeAttributes,
-        childNodes
-      );
-    }
-    removeAttributeList(removeAttributes);
-    return updates;
-  }
-
   // invokes each update function passing interpolated value
   function update() {
     for (var i = 1, length = arguments.length; i < length; i++) {
@@ -1154,13 +984,9 @@ var hyperHTML = (function (globalDocument) {'use strict';
     var updates;
     var info =  templates.get(template) ||
                 createTemplate.call(this, template);
-    if (notAdopting) {
-      var fragment = cloneNode(info.fragment);
-      updates = createUpdates.call(this, fragment, info.paths);
-      resetAndPopulate(this, fragment);
-    } else {
-      updates = discoverUpdates.call(this, info.fragment, info.paths);
-    }
+    var fragment = cloneNode(info.fragment);
+    updates = createUpdates.call(this, fragment, info.paths);
+    resetAndPopulate(this, fragment);
     return {template: template, updates: updates};
   }
 
@@ -1170,7 +996,7 @@ var hyperHTML = (function (globalDocument) {'use strict';
 
   // create a new wire for generic DOM content
   function wireContent(type) {
-    var adopter, content, container, fragment, render, setup, template;
+    var content, container, fragment, render, setup, template;
 
     function before(document) {
       fragment = createDocumentFragment(document);
@@ -1191,44 +1017,16 @@ var hyperHTML = (function (globalDocument) {'use strict';
       return content;
     }
 
-    return type === 'adopt' ?
-      function adopt(statics) {
-        var args = arguments;
-        if (FF) statics = unique(statics);
-        if (template !== statics) {
-          setup = true;
-          template = statics;
-          adopter = function (parentNode, children, i) {
-            if (setup) {
-              if (i < children.length) {
-                container = children[i];
-                fragment = {
-                  ownerDocument: container.ownerDocument,
-                  childNodes: [container],
-                  children: [container]
-                };
-                render = hyper.adopt(fragment);
-              } else {
-                if (OWNER_SVG_ELEMENT in parentNode) type = 'svg';
-                before(parentNode.ownerDocument);
-              }
-            }
-            render.apply(null, args);
-            return after();
-          };
-        }
-        return adopter;
-      } :
-      function update(statics) {
-        if (FF) statics = unique(statics);
-        if (template !== statics) {
-          setup = true;
-          template = statics;
-          before(hyper.document);
-        }
-        render.apply(null, arguments);
-        return after();
-      };
+    return function update(statics) {
+      if (FF) statics = unique(statics);
+      if (template !== statics) {
+        setup = true;
+        template = statics;
+        before(hyper.document);
+      }
+      render.apply(null, arguments);
+      return after();
+    };
   }
 
   // setup a weak reference if needed and return a wire by ID
